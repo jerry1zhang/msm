@@ -8,10 +8,10 @@
             <property name="suppressAllComments" value="true" /> 
         </commentGenerator>
     <jdbcConnection connectionURL="${url}" driverClass="${driverClassName}" password="${password}" userId="${username}" />
-    <javaModelGenerator targetPackage="com.zking.pojo" targetProject="src/main/java" />
-    <sqlMapGenerator targetPackage="com.zking.dao.mapper" targetProject="src/main/java" />
-    <javaClientGenerator targetPackage="com.zking.dao" targetProject="src/main/java" type="XMLMAPPER" />
-	<table tableName="paimaiinfo" domainObjectName="PaimaiInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> 
+    <javaModelGenerator targetPackage="com.zking.pojo.base" targetProject="src/main/java" />
+    <sqlMapGenerator targetPackage="com.zking.dao.mapper.base" targetProject="src/main/java" />
+    <javaClientGenerator targetPackage="com.zking.dao.base" targetProject="src/main/java" type="XMLMAPPER" />
+	<table tableName="tb_static" domainObjectName="ListStatic" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> 
 	
 	
   </context>
