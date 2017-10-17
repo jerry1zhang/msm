@@ -119,6 +119,5 @@ public class TestController extends BaseController{
     	identityService.createMembership("小王", "采购");//建立组和用户关系 
 //    	identityService.createMembership("小李", "部门经理");//建立组和用户关系 
 //    	identityService.createMembership(“小王”, “总经理”);//建立组和用户关系
-		identityService.
     }
 }
