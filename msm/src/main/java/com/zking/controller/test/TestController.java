@@ -33,7 +33,7 @@ import com.zking.controller.base.BaseController;
 public class TestController extends BaseController{
 	@RequestMapping("/1")
 	public String index(){
-		return "qianjsp/index";
+		return "login";
 	}
 	@RequestMapping(value="/2" ,method=RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
