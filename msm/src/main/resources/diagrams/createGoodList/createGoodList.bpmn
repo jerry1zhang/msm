@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
   <process id="createGoodList" name="createGoodList" isExecutable="true">
-    <startEvent id="startevent1" name="Start" activiti:initiator="applyuser"></startEvent>
-    <userTask id="usertask1" name="采购" activiti:candidateGroups="采购"></userTask>
+    <startEvent id="startevent1" name="Start" activiti:initiator="${applyuser}"></startEvent>
+    <userTask id="usertask1" name="采购" activiti:candidateGroups="采购,管理" activiti:dueDate="${duedate}"></userTask>
     <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="usertask1"></sequenceFlow>
-    <userTask id="usertask2" name="入库库管进行核对" activiti:candidateGroups="库管"></userTask>
+    <userTask id="usertask2" name="入库库管进行核对" activiti:candidateGroups="库管,管理" activiti:dueDate="${duedate}"></userTask>
     <sequenceFlow id="flow2" sourceRef="usertask1" targetRef="usertask2"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow3" sourceRef="usertask2" targetRef="exclusivegateway1"></sequenceFlow>
@@ -55,14 +55,14 @@
         <omgdi:waypoint x="615.0" y="219.0"></omgdi:waypoint>
         <omgdi:waypoint x="615.0" y="298.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="16.0" width="100.0" x="615.0" y="219.0"></omgdc:Bounds>
+          <omgdc:Bounds height="16.0" width="70.0" x="615.0" y="219.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
         <omgdi:waypoint x="635.0" y="199.0"></omgdi:waypoint>
         <omgdi:waypoint x="735.0" y="199.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="16.0" width="100.0" x="635.0" y="199.0"></omgdc:Bounds>
+          <omgdc:Bounds height="16.0" width="56.0" x="635.0" y="199.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
