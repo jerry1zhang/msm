@@ -1,156 +1,79 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
-<head>
-	
-	<!-- start: Meta -->
-	<meta charset="utf-8">
-	<title>欢迎登陆保健品销售管理信息系统</title>
-	<!-- end: Meta -->
-	
-	<!-- start: Mobile Specific -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- end: Mobile Specific -->
-	
-	<!-- start: CSS -->
-	<link id="bootstrap-style" href="../css/bootstrap.min.css" rel="stylesheet">
-	<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link id="base-style" href="../css/style.css" rel="stylesheet">
-	<link id="base-style-responsive" href="../css/style-responsive.css" rel="stylesheet">
-	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
-	 -->
-	<!-- end: CSS -->
-	
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Login Page | Amaze UI Example</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="../assets/i/favicon.png">
+  <link rel="stylesheet" href="../assets/css/amazeui.min.css"/>
+  <script src="../assets/js/jquery.min.js"></script>
+  <script>
+    function SUBMIT() {
+      if($("#username").val()==null && $("#username").val()==""){
+          alert("账户为空");
+          return false;
+      }
+      if($("#password").val()==null && $("#password").val()==""){
+          alert("密码为空");
+          return false;
+      }
 
-	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
-	<!--[if lt IE 9]>
-	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<link id="ie-style" href="../css/ie.css" rel="stylesheet">
-	<![endif]-->
-	
-	<!--[if IE 9]>
-		<link id="ie9style" href="../css/ie9.css" rel="stylesheet">
-	<![endif]-->
-		
-	<!-- start: Favicon -->
-	<link rel="shortcut icon" href="../img/favicon.ico">
-	<!-- end: Favicon -->
-	
-			<style type="text/css">
-			body { background: url(../img/bg-login.jpg) !important; }
-		</style>
-		
-		
-		
+      $("#FORM").submit();
+    }
+  </script>
+  <style>
+    .header {
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 200%;
+      color: #333;
+      margin-top: 30px;
+    }
+    .header p {
+      font-size: 14px;
+    }
+  </style>
 </head>
-
 <body>
-		<div class="container-fluid-full">
-		<div class="row-fluid">
-					
-			<div class="row-fluid">
-				<div class="login-box">
-					<div class="icons">
-						<a href="doLogin"><i class="halflings-icon home"></i></a>
-						<a href="#"><i class="halflings-icon cog"></i></a>
-					</div>
-					<h2>登陆你的账户</h2>
-					<form class="form-horizontal" action="index.html" method="post">
-						<fieldset>
-							
-							<div class="input-prepend" title="Username">
-								<span class="add-on"><i class="halflings-icon user"></i></span>
-								<input class="input-large span10" name="username" id="username" type="text" placeholder="账户"/>
-							</div>
-							<div class="clearfix"></div>
+<div class="header">
+  <div class="am-g">
+    <h1>保健品销售信息管理系统</h1>
+    <p>销售，库存，合同，账务，用户管理</p>
+  </div>
+  <hr />
+</div>
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+    <h3>登录</h3>
+    <hr>
+    <br>
+    <br>
 
-							<div class="input-prepend" title="Password">
-								<span class="add-on"><i class="halflings-icon lock"></i></span>
-								<input class="input-large span10" name="password" id="password" type="password" placeholder="密码"/>
-							</div>
-							<div class="clearfix"></div>
-							
-							<label class="remember" for="remember"><input type="checkbox" id="remember" />Remember me</label>
-
-							<div class="button-login">	
-								<button type="submit" class="btn btn-primary">登陆</button>
-							</div>
-							<div class="clearfix"></div>
-					</form>
-					<hr>
-				</div><!--/span-->
-			</div><!--/row-->
-			
-
-	</div><!--/.fluid-container-->
-	
-		</div><!--/fluid-row-->
-	    <div class="common-modal modal fade" id="common-Modal1" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-content">
-				<ul class="list-inline item-details">
-					<li><a href="#">Admin templates</a></li>
-					<li><a href="http://themescloud.org">Bootstrap themes</a></li>
-				</ul>
-			</div>
-		</div>
-	<!-- start: JavaScript-->
-
-		<script src="../js/jquery-1.9.1.min.js"></script>
-	<script src="../js/jquery-migrate-1.0.0.min.js"></script>
-	
-		<script src="../js/jquery-ui-1.10.0.custom.min.js"></script>
-	
-		<script src="../js/jquery.ui.touch-punch.js"></script>
-	
-		<script src="../js/modernizr.js"></script>
-	
-		<script src="../js/bootstrap.min.js"></script>
-	
-		<script src="../js/jquery.cookie.js"></script>
-	
-		<script src='../js/fullcalendar.min.js'></script>
-	
-		<script src='../js/jquery.dataTables.min.js'></script>
-
-		<script src="../js/excanvas.js"></script>
-	<script src="../js/jquery.flot.js"></script>
-	<script src="../js/jquery.flot.pie.js"></script>
-	<script src="../js/jquery.flot.stack.js"></script>
-	<script src="../js/jquery.flot.resize.min.js"></script>
-	
-		<script src="../js/jquery.chosen.min.js"></script>
-	
-		<script src="../js/jquery.uniform.min.js"></script>
-		
-		<script src="../js/jquery.cleditor.min.js"></script>
-	
-		<script src="../js/jquery.noty.js"></script>
-	
-		<script src="../js/jquery.elfinder.min.js"></script>
-	
-		<script src="../js/jquery.raty.min.js"></script>
-	
-		<script src="../js/jquery.iphone.toggle.js"></script>
-	
-		<script src="../js/jquery.uploadify-3.1.min.js"></script>
-	
-		<script src="../js/jquery.gritter.min.js"></script>
-	
-		<script src="../js/jquery.imagesloaded.js"></script>
-	
-		<script src="../js/jquery.masonry.min.js"></script>
-	
-		<script src="../js/jquery.knob.modified.js"></script>
-	
-		<script src="../js/jquery.sparkline.min.js"></script>
-	
-		<script src="../js/counter.js"></script>
-	
-		<script src="../js/retina.js"></script>
-
-		<script src="../js/custom.js"></script>
-	<!-- end: JavaScript-->
-	
+    <form method="post" class="/login/doLogin" id="FORM">
+      <label for="username">账户:</label>
+      <input type="text" name="username" id="username" value="">
+      <br>
+      <label for="password">密码:</label>
+      <input type="password" name="password" id="password" value="">
+      <br>
+      <label for="remember-me">
+        <input id="remember-me" type="checkbox">
+        记住密码
+      </label>
+      <br />
+      <div class="am-cf">
+        <input type="button" onclick="" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
+      </div>
+    </form>
+    <hr>
+    <p>© 2017 湖南城市学院 张弘毅</p>
+  </div>
+</div>
 </body>
 </html>

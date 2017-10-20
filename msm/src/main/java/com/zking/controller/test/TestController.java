@@ -1,12 +1,13 @@
 package com.zking.controller.test;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import com.zking.util.MD5Util;
+import com.zking.util.TimeUtil;
 import org.activiti.engine.*;
 import org.activiti.engine.identity.Group;
 import org.activiti.engine.identity.User;
@@ -47,26 +48,25 @@ public class TestController extends BaseController{
 
 	/**
 	 * 新建组用户
-	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/addUser")
-	public String addUser(HttpServletRequest request){
+	public String addUser(){
 		//新建用户
-		if(request.getParameter("username")!=null){
-			User user = identityService.newUser(request.getParameter("username"));
-			user.setFirstName(request.getParameter("firstname"));
-			user.setLastName(request.getParameter("lastname"));
-			user.setEmail(request.getParameter("email"));
-			user.setPassword(MD5Util.MD5Encode(request.getParameter("password")));
+		if(getRequest().getParameter("username")!=null){
+			User user = identityService.newUser(getRequest().getParameter("username"));
+			user.setFirstName(getRequest().getParameter("firstname"));
+			user.setLastName(getRequest().getParameter("lastname"));
+			user.setEmail(getRequest().getParameter("email"));
+			user.setPassword(MD5Util.MD5Encode(getRequest().getParameter("password")));
 			identityService.saveUser(user);
-			identityService.createMembership(request.getParameter("username"),request.getParameter("group"));
+			identityService.createMembership(getRequest().getParameter("username"),getRequest().getParameter("group"));
 		}
 		//查询现有组和用户
 		List<Group> groupList = identityService.createGroupQuery().list();
-		request.setAttribute("grouplist",groupList);
+		getRequest().setAttribute("grouplist",groupList);
 		List<User> userList = identityService.createUserQuery().list();
-		request.setAttribute("userlist",userList);
+		getRequest().setAttribute("userlist",userList);
 		return "test/addUser";
 	}
 
@@ -97,7 +97,13 @@ public class TestController extends BaseController{
 		if(request.getParameterValues("taskidlist")!=null){
 			String[] list = request.getParameterValues("taskidlist");
 			for (String e:list) {
-				ProcessInstance pi = runtimeService.startProcessInstanceByKey(e);
+				//两天后任务结束
+				Date duedate = TimeUtil.getAddDay(2);
+				Map<String,Object> var = new HashMap<>();
+				var.put("duedate",duedate);
+				User user = (User)getSession().getAttribute("User");
+				//创建任务
+				ProcessInstance pi = runtimeService.startProcessInstanceByKey(e,user.getId(),var);
 				logger.info("流程编号："+pi.getProcessDefinitionId()+"流程名："+pi.getName()+"已经启动");
 			}
 		}
@@ -250,7 +256,7 @@ public class TestController extends BaseController{
     	
     }
     
-//    @Test
+//	@Test
     public void delAll() {
     	ProcessEngine processEngine = ProcessEngineConfiguration
 				.createProcessEngineConfigurationFromResource("activiti.cfg.xml")

@@ -1,6 +1,7 @@
 package com.zking.controller.base;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -25,6 +26,15 @@ public class BaseController {
 	public HttpServletRequest getRequest() {
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		return request;
+	}
+
+	/**
+	 * 得到request对象
+	 */
+	public HttpSession getSession() {
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+		HttpSession session = request.getSession();
+		return session;
 	}
 	
 	public static void logBefore(Logger logger, String interfaceName){

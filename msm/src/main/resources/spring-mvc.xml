@@ -17,11 +17,11 @@
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler />
 	<mvc:interceptors>
-	    <mvc:interceptor>  
-	        <mvc:mapping path="/main/*"/>  
-	        <bean class="com.zking.Interceptor.AllInterceptor"/>  
-	        <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->  
-	    </mvc:interceptor>  
+	    <mvc:interceptor>
+	        <mvc:mapping path="/main/*"/>
+	        <bean class="com.zking.Interceptor.AllInterceptor"/>
+	        <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
+	    </mvc:interceptor>
 	</mvc:interceptors>
 
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
@@ -41,7 +41,7 @@
 		<!-- 内存中的最大值 -->
 		<property name="maxInMemorySize" value="40960" />
 	</bean>
-	
+
 	<!-- Activemq 连接工厂 -->
     <!--  <bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <constructor-arg value="system1" />
@@ -51,7 +51,7 @@
     -->
 
     <!-- ConnectionFactory Definition -->
-    <!-- 
+    <!--
     <bean id="connectionFactory"
         class="org.springframework.jms.connection.CachingConnectionFactory">
         <constructor-arg ref="activeMQConnectionFactory" />
@@ -60,7 +60,7 @@
 
     <!-- Default Destination Queue Definition -->
     <!-- 测试配置多个Destination -->
-    <!-- 
+    <!--
     <bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
         <constructor-arg index="0" value="test.activemq.queue" />
     </bean>
@@ -72,7 +72,7 @@
         <property name="defaultDestination" ref="destination" />
     </bean>
       -->
-<!--  
+<!--
     Message Sender Definition
     <bean id="messageSender" class="com.zking.util.MessageSender">
         <constructor-arg index="0" ref="jmsTemplate" />
@@ -88,27 +88,29 @@
         <property name="messageListener" ref="messageReceiver" />
     </bean>
 -->
-	<!-- activiti5集成spring配置 -->  
-    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">  
-		<property name="dataSource" ref="dataSource" />  
-		<property name="transactionManager" ref="transactionManager" />  
-		<!-- 
-		<property name="databaseSchemaUpdate" value="true" />  
-		<property name="deploymentResources" value="classpath:/diagram/leave.zip" />  
+	<!-- activiti5集成spring配置 -->
+    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+		<property name="dataSource" ref="dataSource" />
+		<property name="transactionManager" ref="transactionManager" />
+		<!--
+		<property name="databaseSchemaUpdate" value="true" />
+		<property name="deploymentResources" value="classpath:/diagram/leave.zip" />
 		 -->
-	</bean>  
-   
-	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">  
-    	<property name="processEngineConfiguration" ref="processEngineConfiguration" />  
-	</bean>  
-    
-	<bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService" />  
-	<bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService" />  
-	<bean id="taskService" factory-bean="processEngine" factory-method="getTaskService" />  
-	<bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />  
-	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />  
-	<bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService" />  
-	<bean id="formService" factory-bean="processEngine" factory-method="getFormService" />  
-	
-	
+	</bean>
+
+	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+    	<property name="processEngineConfiguration" ref="processEngineConfiguration" />
+	</bean>
+
+	<bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService" />
+	<bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService" />
+	<bean id="taskService" factory-bean="processEngine" factory-method="getTaskService" />
+	<bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />
+	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
+	<bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService" />
+	<bean id="formService" factory-bean="processEngine" factory-method="getFormService" />
+
+	<bean id="userBiz" class="com.zking.biz.user.UserBizImpl"></bean>
+	<bean id="taskBiz" class="com.zking.biz.task.TaskBizImpl"></bean>
+
 </beans>
