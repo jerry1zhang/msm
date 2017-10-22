@@ -1,4 +1,4 @@
-package com.zking.pojo.base;
+package com.zking.pojo;
 
 import java.util.Date;
 

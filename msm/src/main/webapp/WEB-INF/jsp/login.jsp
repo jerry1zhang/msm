@@ -14,14 +14,6 @@
   <script src="../assets/js/jquery.min.js"></script>
   <script>
     function SUBMIT() {
-      if($("#username").val()==null && $("#username").val()==""){
-          alert("账户为空");
-          return false;
-      }
-      if($("#password").val()==null && $("#password").val()==""){
-          alert("密码为空");
-          return false;
-      }
 
       $("#FORM").submit();
     }
@@ -52,15 +44,22 @@
   <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
     <h3>登录</h3>
     <hr>
+    <p><%
+      String info = "";
+      if (request.getParameter("error_info")!=null){
+          info = (String) request.getAttribute("error_info");
+      }
+    %>
+      <%=info%></p>
     <br>
     <br>
 
-    <form method="post" class="/login/doLogin" id="FORM">
+    <form method="post" action="/login/doLogin" class="am-form" id="FORM">
       <label for="username">账户:</label>
-      <input type="text" name="username" id="username" value="">
+      <input type="text" name="username" id="username" value="" placeholder="输入账户" required>
       <br>
       <label for="password">密码:</label>
-      <input type="password" name="password" id="password" value="">
+      <input type="password" name="password" id="password" value="" placeholder="输入密码" required>
       <br>
       <label for="remember-me">
         <input id="remember-me" type="checkbox">
@@ -68,9 +67,11 @@
       </label>
       <br />
       <div class="am-cf">
-        <input type="button" onclick="" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
+        <input type="submit" name="sub" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
       </div>
     </form>
+
+
     <hr>
     <p>© 2017 湖南城市学院 张弘毅</p>
   </div>

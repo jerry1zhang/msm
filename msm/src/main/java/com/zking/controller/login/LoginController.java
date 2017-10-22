@@ -1,6 +1,7 @@
 package com.zking.controller.login;
 
 import com.zking.biz.user.UserBiz;
+import com.zking.config.ConfigCode;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -37,10 +38,21 @@ public class LoginController extends BaseController{
 	
 	@RequestMapping("/doLogin")
 	public String doLogin(){
+		if(getSession().getAttribute("User")==null)
 		if(!userBiz.getUser(getRequest(),identityService)){
-			return "admin-404";
+			return "login";
 		}
+		getRequest().setAttribute("title1", ConfigCode.page_title_1.toString());
+		getRequest().setAttribute("title2",ConfigCode.page_title_2.toString());
+		getRequest().setAttribute("apple_title",ConfigCode.page_title_1.toString()+ConfigCode.page_title_2.toString());
 		return "admin-index";
+	}
+
+	@RequestMapping("over")
+	public String over(){
+		getSession().removeAttribute("User");
+		getSession().removeAttribute("Group");
+		return "login";
 	}
 
 	@RequestMapping("/doTask")

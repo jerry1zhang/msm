@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zking.dao.base.ListStaticMapper">
-  <resultMap id="BaseResultMap" type="com.zking.pojo.base.ListStatic">
+<mapper namespace="com.zking.dao.ListStaticMapper">
+  <resultMap id="BaseResultMap" type="com.zking.pojo.ListStatic">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="list_type" jdbcType="VARCHAR" property="listType" />
     <result column="item_name" jdbcType="VARCHAR" property="itemName" />
@@ -21,13 +21,13 @@
     delete from tb_static
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.zking.pojo.base.ListStatic">
+  <insert id="insert" parameterType="com.zking.pojo.ListStatic">
     insert into tb_static (id, list_type, item_name, 
       item_value, b_time)
     values (#{id,jdbcType=INTEGER}, #{listType,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, 
       #{itemValue,jdbcType=VARCHAR}, #{bTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.zking.pojo.base.ListStatic">
+  <insert id="insertSelective" parameterType="com.zking.pojo.ListStatic">
     insert into tb_static
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zking.pojo.base.ListStatic">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.pojo.ListStatic">
     update tb_static
     <set>
       <if test="listType != null">
@@ -82,7 +82,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zking.pojo.base.ListStatic">
+  <update id="updateByPrimaryKey" parameterType="com.zking.pojo.ListStatic">
     update tb_static
     set list_type = #{listType,jdbcType=VARCHAR},
       item_name = #{itemName,jdbcType=VARCHAR},

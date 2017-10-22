@@ -1,6 +1,6 @@
-package com.zking.dao.base;
+package com.zking.dao;
 
-import com.zking.pojo.base.ListStatic;
+import com.zking.pojo.ListStatic;
 
 public interface ListStaticMapper {
     int deleteByPrimaryKey(Integer id);

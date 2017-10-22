@@ -1,36 +1,56 @@
 package com.zking.Interceptor;
 
+import org.activiti.engine.identity.Group;
+import org.activiti.engine.identity.User;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.context.request.WebRequestInterceptor;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
-public class AllInterceptor implements WebRequestInterceptor {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-	/**
-	 * 该方法将在整个请求完成之后，也就是说在视图渲染之后进行调用，主要用于进行一些资源的释放
-	 */
+public class AllInterceptor implements HandlerInterceptor {
 	@Override
-	public void afterCompletion(WebRequest arg0, Exception arg1) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		User user = (User) request.getSession().getAttribute("User");
+		Group group = (Group) request.getSession().getAttribute("Group");
+		if(request.getRequestURI().endsWith("/loginPage")||
+				request.getRequestURI().endsWith(".js")||
+				request.getRequestURI().endsWith(".css")||
+				request.getRequestURI().endsWith(".png")||
+				request.getRequestURI().endsWith(".otf")||
+				request.getRequestURI().endsWith(".eot")||
+				request.getRequestURI().endsWith(".ttf")||
+				request.getRequestURI().endsWith(".woff")||
+				request.getRequestURI().endsWith(".woff2")) {
+
+			return true;
+
+		}else{
+			if (user != null && group != null) {
+				return true;
+			} else {
+				response.sendRedirect(request.getContextPath() + "/login/loginPage");
+				return false;
+			}
+		}
 
 	}
 
-	/**
-	 *  该方法将在Controller执行之后，返回视图之前执行，ModelMap表示请求Controller处理之后返回的Model对象，所以可以在 
-     * 这个方法中修改ModelMap的属性，从而达到改变返回的模型的效果。 
-	 */
 	@Override
-	public void postHandle(WebRequest arg0, ModelMap arg1) throws Exception {
-		// TODO Auto-generated method stub
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
 	}
 
-	/**
-	 * 在请求处理之前执行，该方法主要是用于准备资源数据的，然后可以把它们当做请求属性放到WebRequest中
-	 */
 	@Override
-	public void preHandle(WebRequest arg0) throws Exception {
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 
 	}
 
+	private void initMenu(HttpServletRequest request){
+
+	}
 }
