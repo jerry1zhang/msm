@@ -3,6 +3,8 @@ package com.zking.controller.base;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.activiti.engine.identity.Group;
+import org.activiti.engine.identity.User;
 import org.apache.log4j.Logger;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -35,6 +37,14 @@ public class BaseController {
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		HttpSession session = request.getSession();
 		return session;
+	}
+
+	public User getUser(){
+		return (User) getSession().getAttribute("User");
+	}
+
+	public Group getGroup(){
+		return (Group) getSession().getAttribute("Group");
 	}
 	
 	public static void logBefore(Logger logger, String interfaceName){

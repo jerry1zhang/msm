@@ -11,10 +11,7 @@ public class PageInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //初始化参数
-        request.setAttribute("title1", ConfigCode.page_title_1.toString());
-        request.setAttribute("title2",ConfigCode.page_title_2.toString());
-        request.setAttribute("apple_title",ConfigCode.page_title_1.toString()+ConfigCode.page_title_2.toString());
-        return true;
+       return true;
     }
 
     @Override

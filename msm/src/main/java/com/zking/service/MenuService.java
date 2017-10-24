@@ -5,7 +5,6 @@ import com.zking.pojo.Menu;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Resource
 public interface MenuService {
     /**
      * 获得菜单列表

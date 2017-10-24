@@ -18,6 +18,7 @@ public class AllInterceptor implements HandlerInterceptor {
 		User user = (User) request.getSession().getAttribute("User");
 		Group group = (Group) request.getSession().getAttribute("Group");
 		if(request.getRequestURI().endsWith("/loginPage")||
+				request.getRequestURI().endsWith("/login/doLogin")||
 				request.getRequestURI().endsWith(".js")||
 				request.getRequestURI().endsWith(".css")||
 				request.getRequestURI().endsWith(".png")||

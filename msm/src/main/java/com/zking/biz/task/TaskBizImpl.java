@@ -6,10 +6,11 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.identity.Group;
 import org.activiti.engine.identity.User;
 import org.activiti.engine.task.Task;
+import org.springframework.stereotype.Repository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
+@Repository
 public class TaskBizImpl extends BaseBiz implements TaskBiz{
     @Override
     public boolean getTaskList(IdentityService identityService, TaskService taskService, HttpServletRequest request) {

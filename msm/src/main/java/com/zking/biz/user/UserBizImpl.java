@@ -3,67 +3,87 @@ package com.zking.biz.user;
 import com.zking.biz.BaseBiz;
 import com.zking.biz.user.UserBiz;
 import com.zking.config.ConfigCode;
+import com.zking.enetity.UserBody;
 import com.zking.util.MD5Util;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.identity.Group;
 import org.activiti.engine.identity.User;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
-
+@Repository
 public class UserBizImpl extends BaseBiz implements UserBiz{
 
     @Override
-    public boolean addUser(HttpServletRequest request, IdentityService identityService) {
+    public boolean addUser(IdentityService identityService,User arg0,String GroupId) {
         //新建用户
-        if(request.getParameter("username")!=null){
-            User user = identityService.newUser(request.getParameter("username"));
-            user.setFirstName(request.getParameter("firstname"));
-            user.setLastName(request.getParameter("lastname"));
-            user.setEmail(request.getParameter("email"));
-            user.setPassword(MD5Util.MD5Encode(request.getParameter("password")));
+        try {
+            User user = identityService.newUser(arg0.getId());
+            user.setFirstName(arg0.getFirstName());
+            user.setLastName(arg0.getLastName());
+            user.setEmail(arg0.getEmail());
+            user.setPassword(MD5Util.MD5Encode(arg0.getPassword()));
             identityService.saveUser(user);
-            identityService.createMembership(request.getParameter("username"),request.getParameter("group"));
-        }
-        //查询现有组和用户
-        List<Group> groupList = identityService.createGroupQuery().list();
-        request.setAttribute("grouplist",groupList);
-        List<User> userList = identityService.createUserQuery().list();
-        request.setAttribute("userlist",userList);
-        return true;
-    }
-
-    @Override
-    public boolean addGroup(HttpServletRequest request, IdentityService identityService) {
-        //新建组
-        if(request.getParameter("groupname")!=null) {
-            Group group = identityService.newGroup(request.getParameter("groupname"));
-            group.setName(request.getParameter("groupname"));
-            group.setType(request.getParameter("grouptype"));
-            identityService.saveGroup(group);
-        }
-        //查询现有组
-        List<Group> groupList = identityService.createGroupQuery().list();
-        request.setAttribute("grouplist",groupList);
-        return true;
-    }
-
-    @Override
-    public boolean getUser(HttpServletRequest request, IdentityService identityService) {
-        //查找用户信息
-        User userinfo = identityService.createUserQuery().userId(request.getParameter("username")).singleResult();
-        if(userinfo.getPassword().equals(MD5Util.MD5Encode(request.getParameter("password")))) {
-            request.getSession().setAttribute("User", userinfo);
-            //判断用户所在组
-            Group groupContainsUser = identityService.createGroupQuery().groupMember(request.getParameter("username")).singleResult();
-            request.getSession().setAttribute("Group", groupContainsUser);
-            logger.info("用户id:" + userinfo.getId() + "||用户所属组：||ID:" + groupContainsUser.getId() + "||NAME:" + groupContainsUser.getName()+"||登陆");
-        }else {
-            request.setAttribute("error_info", ConfigCode.user_error_1);
-            logger.info("用户id:"+request.getParameter("username")+"||错误信息:"+ConfigCode.user_error_1);
+            identityService.createMembership(arg0.getId(),GroupId);
+        }catch (Exception e){
+            logger.error(ConfigCode.ADD_USER_ERROR+"||error:"+e.getMessage());
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean addGroup(IdentityService identityService,Group arg0) {
+        //新建组
+        if(arg0!=null) {
+            Group group = identityService.newGroup(arg0.getId());
+            group.setName(arg0.getName());
+            group.setType(arg0.getType());
+            identityService.saveGroup(group);
+        }else{
+            logger.error("组新增失败");
+        }
+        return true;
+    }
+
+    @Override
+    public UserBody getUser(IdentityService identityService,User user) {
+        UserBody userBody = new UserBody();
+        //查找用户信息
+        User userinfo = identityService.createUserQuery().userId(user.getId()).singleResult();
+        if(userinfo.getPassword().equals(MD5Util.MD5Encode(user.getPassword()))) {
+            userBody.setUser(userinfo);
+            //判断用户所在组
+            Group groupContainsUser = identityService.createGroupQuery().groupMember(user.getId()).singleResult();
+            userBody.setGroup(groupContainsUser);
+            logger.info("用户id:" + userinfo.getId() + "||用户所属组：||ID:" + groupContainsUser.getId() + "||NAME:" + groupContainsUser.getName()+"||登陆");
+        }else {
+            logger.info("用户id:"+user.getId()+"||错误信息:"+ConfigCode.user_error_1.getValue());
+            return null;
+        }
+        return userBody;
+    }
+
+    @Override
+    public  List<UserBody> getUserList( IdentityService identityService,int start,int end) {
+        List<UserBody> userBodies = new ArrayList<>();
+        List<User> users = identityService.createUserQuery().listPage(start,end);
+        UserBody userBody;
+        for (User e: users) {
+            userBody = new UserBody();
+            userBody.setUser(e);
+            userBody.setGroup(identityService.createGroupQuery().groupMember(e.getId()).singleResult());
+            userBodies.add(userBody);
+        }
+        return userBodies;
+    }
+
+    @Override
+    public List<Group> getGroupList( IdentityService identityService,int start,int end) {
+        List<Group> groups = identityService.createGroupQuery().listPage(start,end);
+        return groups;
     }
 }

@@ -23,7 +23,7 @@ public class PageController extends BaseController{
 	@RequestMapping(value="/init" ,method= RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public Object init(){
-		Map<String,Object> INFO = menuBiz.initMenu(0);
-		return new Gson().toJson(INFO).toString();
+//		Map<String,Object> INFO = menuBiz.initMenu(0);
+		return new Gson().toJson("").toString();
 	}
 }

@@ -3,12 +3,14 @@ package com.zking.service.impl;
 import com.zking.dao.MenuMapper;
 import com.zking.pojo.Menu;
 import com.zking.service.MenuService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-@Resource
+@Service
 public class MenuServiceImpl implements MenuService{
+    @Resource
     MenuMapper menuMapper;
     @Override
     public List<Menu> getMenuList(int powerLevel, int level) {

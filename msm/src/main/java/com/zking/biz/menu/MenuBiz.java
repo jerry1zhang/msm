@@ -1,14 +1,16 @@
 package com.zking.biz.menu;
 
+import com.zking.enetity.MenuBody;
+
 import javax.annotation.Resource;
-import java.util.Map;
+import java.util.List;
 @Resource()
 public interface MenuBiz {
     /**
      * 初始化菜单
      * @return
      */
-    public Map<String,Object> initMenu(int powerLevel);
+    public List<MenuBody> initMenu(int powerLevel);
 
 
 

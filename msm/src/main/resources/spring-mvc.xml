@@ -23,7 +23,7 @@
 	        <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
 	    </mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/menu/**"/>
+			<mvc:mapping path="/main/**"/>
 			<bean class="com.zking.Interceptor.PageInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -115,8 +115,5 @@
 	<bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService" />
 	<bean id="formService" factory-bean="processEngine" factory-method="getFormService" />
 
-	<bean id="userBiz" class="com.zking.biz.user.UserBizImpl"></bean>
-	<bean id="taskBiz" class="com.zking.biz.task.TaskBizImpl"></bean>
-	<bean id="menuBiz" class="com.zking.biz.menu.MenuBizImpl"></bean>
 
 </beans>
