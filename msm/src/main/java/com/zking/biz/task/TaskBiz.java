@@ -7,5 +7,5 @@ import org.activiti.engine.TaskService;
 import javax.servlet.http.HttpServletRequest;
 
 public interface TaskBiz{
-    public boolean getTaskList(IdentityService identityService, TaskService taskService, HttpServletRequest request);
+    boolean getTaskList(IdentityService identityService, TaskService taskService, HttpServletRequest request);
 }

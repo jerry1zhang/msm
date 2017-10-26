@@ -22,5 +22,8 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="target/msm/WEB-INF/lib/jstl-api-1.2.jar"/>
+	<classpathentry kind="lib" path="target/msm/WEB-INF/lib/jstl-impl-1.2.jar"/>
+	<classpathentry kind="lib" path="target/msm/WEB-INF/lib/standard-1.1.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

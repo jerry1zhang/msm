@@ -10,7 +10,7 @@ public interface MenuBiz {
      * 初始化菜单
      * @return
      */
-    public List<MenuBody> initMenu(int powerLevel);
+    List<MenuBody> initMenu(int powerLevel);
 
 
 

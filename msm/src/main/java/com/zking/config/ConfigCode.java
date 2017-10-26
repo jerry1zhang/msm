@@ -13,7 +13,7 @@ public enum ConfigCode {
 
     private final String value;
 
-    private ConfigCode(String value)
+    ConfigCode(String value)
     {
 
         this.value = value;

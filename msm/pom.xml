@@ -141,11 +141,6 @@
 			<version>${druid.version}</version>
 		</dependency>
 		<!-- JSTL标签类 -->
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
 		<!-- 日志文件管理包 -->
 		<!-- log start -->
 		<dependency>

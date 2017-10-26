@@ -17,6 +17,12 @@
     from tb_static
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByListType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_static
+    where list_type = #{listType,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_static
     where id = #{id,jdbcType=INTEGER}

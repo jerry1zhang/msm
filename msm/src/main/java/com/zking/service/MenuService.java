@@ -12,26 +12,26 @@ public interface MenuService {
      * @param level
      * @return
      */
-    public List<Menu> getMenuList(int powerLevel,int level);
+    List<Menu> getMenuList(int powerLevel, int level);
 
     /**
      * 删除菜单
      * @param menu
      * @return
      */
-    public boolean del(Menu menu);
+    boolean del(Menu menu);
 
     /**
      * 增加菜单
      * @param menu
      * @return
      */
-    public boolean add(Menu menu);
+    boolean add(Menu menu);
 
     /**
      * 修改菜单
      * @param menu
      * @return
      */
-    public boolean update(Menu menu);
+    boolean update(Menu menu);
 }

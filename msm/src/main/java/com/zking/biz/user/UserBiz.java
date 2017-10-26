@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface UserBiz {
-    public boolean addUser(IdentityService identityService, User user,String groupId);
-    public boolean addGroup(IdentityService identityService,Group group);
-    public UserBody getUser(IdentityService identityService,User user);
-    public List<UserBody> getUserList(IdentityService identityService, int start, int end);
-    public List<Group> getGroupList(IdentityService identityService, int start, int end);
+    boolean addUser(IdentityService identityService, User user, String groupId);
+    boolean addGroup(IdentityService identityService, Group group);
+    UserBody getUser(IdentityService identityService, User user);
+    List<UserBody> getUserList(IdentityService identityService, int start, int end);
+    List<Group> getGroupList(IdentityService identityService, int start, int end);
 }

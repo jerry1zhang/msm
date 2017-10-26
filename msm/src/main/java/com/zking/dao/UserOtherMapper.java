@@ -1,7 +1,9 @@
 package com.zking.dao;
 
 import com.zking.pojo.UserOther;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserOtherMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.zking.biz.menu.MenuBiz;
 import com.zking.biz.task.TaskBiz;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zking.controller.base.BaseController;
@@ -26,4 +27,6 @@ public class PageController extends BaseController{
 //		Map<String,Object> INFO = menuBiz.initMenu(0);
 		return new Gson().toJson("").toString();
 	}
+
+
 }
