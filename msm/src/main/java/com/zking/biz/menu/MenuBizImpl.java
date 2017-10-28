@@ -1,25 +1,32 @@
 package com.zking.biz.menu;
 
-import com.zking.biz.BaseBiz;
+import com.zking.biz.BaseBizImpl;
 import com.zking.config.ConfigCode;
 import com.zking.enetity.MenuBody;
 import com.zking.pojo.Menu;
+import com.zking.service.BaseService;
 import com.zking.service.MenuService;
+import com.zking.service.impl.MenuServiceImpl;
+import com.zking.util.PageData;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 @Repository
-public class MenuBizImpl extends BaseBiz implements MenuBiz{
+public class MenuBizImpl extends BaseBizImpl implements MenuBiz{
 
     @Resource
-    MenuService menuService;
+    BaseService baseService = new MenuServiceImpl();
 
     @Override
     public List<MenuBody> initMenu(int powerLevel) {
-        List<Menu> one = menuService.getMenuList(powerLevel,Integer.valueOf(ConfigCode.LEVEL_BIGMENU.getValue()));
-        List<Menu> two = menuService.getMenuList(powerLevel,Integer.valueOf(ConfigCode.LEVEL_SMALLMENU.getValue()));
+        PageData pg = new PageData();
+        pg.put("powerLevel",powerLevel);
+        pg.put("level",ConfigCode.LEVEL_BIGMENU.getValue());
+        List<Menu> one = (List<Menu>)baseService.getPartList(pg).get("list");
+        pg.put("level",ConfigCode.LEVEL_SMALLMENU.getValue());
+        List<Menu> two = (List<Menu>)baseService.getPartList(pg).get("list");
         if (one==null || two == null) {
             return null;
         }

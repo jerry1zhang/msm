@@ -1,6 +1,5 @@
 package com.zking.biz.task;
 
-import com.zking.biz.BaseBiz;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.TaskService;
 

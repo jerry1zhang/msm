@@ -7,7 +7,7 @@
  * @调用方法
  * $(selector).pagination(option, callback);
  * -此处callback是初始化调用，option里的callback才是点击页码后调用
- * 
+ *
  * -- example --
  * $(selector).pagination({
  *     ...
@@ -18,7 +18,6 @@
  *     console.log('初始化'); //插件初始化时调用该回调，比如请求第一次接口来初始化分页配置
  * });
  */
-;
 (function (factory) {
     if (typeof define === "function" && (define.amd || define.cmd) && !jQuery) {
         // AMD或CMD

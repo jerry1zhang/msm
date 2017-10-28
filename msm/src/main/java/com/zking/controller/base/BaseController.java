@@ -3,6 +3,7 @@ package com.zking.controller.base;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.zking.util.PageData;
 import org.activiti.engine.identity.Group;
 import org.activiti.engine.identity.User;
 import org.apache.log4j.Logger;
@@ -56,5 +57,9 @@ public class BaseController {
 	public static void logAfter(Logger logger){
 		logger.info("end");
 		logger.info("");
+	}
+
+	public PageData getPageData(){
+		return new PageData();
 	}
 }

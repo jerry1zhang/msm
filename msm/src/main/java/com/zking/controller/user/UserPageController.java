@@ -5,9 +5,10 @@ import com.zking.config.ConfigCode;
 import com.zking.config.KeyConfig;
 import com.zking.controller.base.BaseController;
 import com.zking.enetity.UserBody;
-import com.zking.pojo.ListStatic;
+import com.zking.service.BaseService;
 import com.zking.service.ListStaticService;
-import com.zking.util.MD5Util;
+import com.zking.service.impl.ListStaticServiceImpl;
+import com.zking.util.PageData;
 import org.activiti.engine.*;
 import org.activiti.engine.identity.Group;
 import org.activiti.engine.identity.User;
@@ -36,7 +37,7 @@ public class UserPageController extends BaseController{
     @Resource
     HistoryService historyService;
     @Resource
-    ListStaticService listStaticService;
+    BaseService baseService = new ListStaticServiceImpl();
 
     @Resource
     UserBiz userBiz;
@@ -73,28 +74,56 @@ public class UserPageController extends BaseController{
         return "/user/addGroup";
     }
 
+    /**
+     * 用户列表界面刷新
+     * @param model
+     * @return
+     */
     @RequestMapping("/userList")
     public String UserList(Model model){
+        String type = getRequest().getParameter("type")==null?"":getRequest().getParameter("type");
+        String value = getRequest().getParameter("value")==null?"":getRequest().getParameter("value");
+        logger.info("type="+type+"value="+value);
         int page = 1;
         int start = (page-1)*KeyConfig.pagenum;
         int end = page*KeyConfig.pagenum;
-        List<UserBody> userBodies = userBiz.getUserList(identityService,start,end);
+        List<UserBody> userBodies =  null;
+        if(!"".equals(type)&&!"".equals(value)){
+            //通过某个值进行搜索
+            userBodies = userBiz.getUserList(identityService,start,end,type,value);
+        }else{
+            userBodies = userBiz.getUserList(identityService,start,end);
+        }
+
+
         if(userBodies==null){
             return "error";
         }
         model.addAttribute("userBodies",userBodies);
-        model.addAttribute("userList",listStaticService.getList("userList"));
+        model.addAttribute("userList",baseService.getAllList(getPageData()).get("list"));
         model.addAttribute("listNum",identityService.createUserQuery().count());
         return "/user/userList";
     }
 
-
+    /**
+     * 用户列表表格刷新
+     * @param page
+     * @param model
+     * @return
+     */
     @RequestMapping(value="/{page}", method= RequestMethod.POST)
     public String a(@PathVariable int page,Model model){
-        logger.info("page="+page);
+        String type = getRequest().getParameter("type")==null?"":getRequest().getParameter("type");
+        String value = getRequest().getParameter("value")==null?"":getRequest().getParameter("value");
         int start = (page-1)*KeyConfig.pagenum;
         int end = page*KeyConfig.pagenum;
-        List<UserBody> userBodies = userBiz.getUserList(identityService,start,end);
+        List<UserBody> userBodies =  null;
+        if(!"".equals(type)&&!"".equals(value)){
+            //通过某个值进行搜索
+            userBodies = userBiz.getUserList(identityService,start,end,type,value);
+        }else{
+            userBodies = userBiz.getUserList(identityService,start,end);
+        }
         if(userBodies==null){
             return "error";
         }

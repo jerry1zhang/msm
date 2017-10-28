@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.zking.pojo.ListStatic" %>
+<%@ page import="com.zking.config.KeyConfig" %>
 <%--
   Created by IntelliJ IDEA.
   User: Jerry
@@ -16,6 +17,11 @@
 <%
     List<ListStatic> userList = (List<ListStatic>)request.getAttribute("userList");
 %>
+<script>
+    function select() {
+        flushPage("user/userList",2);
+    }
+</script>
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
         <div class="am-btn-toolbar">
@@ -29,24 +35,24 @@
     </div>
     <div class="am-u-sm-12 am-u-md-3">
         <div class="am-form-group">
-            <select data-am-selected="{btnSize: 'sm'}">
-                <option value="-1">所有类别</option>
+            搜索类别：
+            <select data-am-selected="{btnSize: 'sm'}" id="selectV">
                 <%
                     if (userList!=null)
                     for (ListStatic e:userList) {
                 %>
                 <option value="<%=e.getItemValue()%>"><%=e.getItemName()%></option>
                 <%
-                        }
+                     }
                 %>
             </select>
         </div>
     </div>
     <div class="am-u-sm-12 am-u-md-3">
         <div class="am-input-group am-input-group-sm">
-            <input type="text" class="am-form-field">
+            <input type="text" class="am-form-field" selectId="selectV">
             <span class="am-input-group-btn">
-            <button class="am-btn am-btn-default" type="button">搜索</button>
+            <button class="am-btn am-btn-default" type="button" onclick="">搜索</button>
           </span>
         </div>
     </div>
@@ -55,23 +61,15 @@
 <div class="am-g">
     <div class="am-u-sm-12">
 
-        <form action="user" id="Form" class="am-form" method="post">
+        <form action="user" id="Form" class="am-form" method="post" data-page="<%=(long)request.getAttribute("listNum")%>" data-max="<%=KeyConfig.pagenum%>">
         </form>
 
 
 
         <div class="am-cf">
             共有 <%=(long)request.getAttribute("listNum")%> 记录
-
             <div class="am-fr">
                 <ul class="am-pagination">
-                    <li class="am-disabled"><a href="#">«</a></li>
-                    <li class="am-active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">»</a></li>
                 </ul>
             </div>
         </div>
@@ -82,4 +80,3 @@
 
 </div>
 </div>
-

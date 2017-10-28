@@ -2,33 +2,61 @@ package com.zking.service.impl;
 
 import com.zking.dao.MenuMapper;
 import com.zking.pojo.Menu;
+import com.zking.service.BaseService;
 import com.zking.service.MenuService;
+import com.zking.util.PageData;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class MenuServiceImpl implements MenuService{
+public class MenuServiceImpl implements BaseService{
     @Resource
     MenuMapper menuMapper;
+
+
     @Override
-    public List<Menu> getMenuList(int powerLevel, int level) {
-        return menuMapper.ListByLevel(level);
+    public PageData getAllList(PageData pg) {
+        return null;
     }
 
     @Override
-    public boolean del(Menu menu) {
-        return menuMapper.deleteByPrimaryKey(menu.getId())!=0;
+    public PageData getAllPageList(PageData pg) {
+        return null;
     }
 
     @Override
-    public boolean add(Menu menu) {
-        return menuMapper.insertSelective(menu)!=0;
+    public PageData getPartList(PageData pg) {
+        int level = Integer.valueOf(pg.getString("level"));
+        List<Menu> list = menuMapper.ListByLevel(level);
+        pg = new PageData();
+        pg.put("list",list);
+        return null;
     }
 
     @Override
-    public boolean update(Menu menu) {
-        return menuMapper.updateByPrimaryKeySelective(menu)!=0;
+    public PageData getPartPageList(PageData pg) {
+        return null;
+    }
+
+    @Override
+    public boolean del(Object object) {
+        return menuMapper.deleteByPrimaryKey(((Menu)object).getId())!=0;
+    }
+
+    @Override
+    public boolean add(Object object) {
+        return menuMapper.insertSelective(((Menu)object))!=0;
+    }
+
+    @Override
+    public boolean update(Object object) {
+        return menuMapper.updateByPrimaryKeySelective(((Menu)object))!=0;
+    }
+
+    @Override
+    public Object select(Object object) {
+        return null;
     }
 }

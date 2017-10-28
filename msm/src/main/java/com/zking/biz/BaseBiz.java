@@ -1,18 +1,16 @@
 package com.zking.biz;
 
-import org.apache.log4j.Logger;
+import com.zking.enetity.UserBody;
+import org.activiti.engine.IdentityService;
+import org.activiti.engine.identity.Group;
+import org.activiti.engine.identity.User;
 
-public class BaseBiz {
-    protected Logger logger = Logger.getLogger(this.getClass());
+import java.util.List;
 
-    public static void logBefore(Logger logger, String interfaceName){
-        logger.info("");
-        logger.info("start");
-        logger.info(interfaceName);
-    }
-
-    public static void logAfter(Logger logger){
-        logger.info("end");
-        logger.info("");
-    }
+public interface BaseBiz {
+    boolean add(IdentityService identityService, User user, String groupId);
+    UserBody getUser(IdentityService identityService, User user);
+    List<UserBody> getUserList(IdentityService identityService, int start, int end);
+    List<UserBody> getUserList(IdentityService identityService, int start, int end,String type,String value);
+    List<Group> getGroupList(IdentityService identityService, int start, int end);
 }

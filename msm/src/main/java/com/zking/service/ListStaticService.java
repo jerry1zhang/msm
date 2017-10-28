@@ -5,5 +5,5 @@ import com.zking.pojo.ListStatic;
 import java.util.List;
 
 public interface ListStaticService {
-    public List<ListStatic> getList(String list_type);
+    List<ListStatic> getList(String list_type);
 }

@@ -1,7 +1,6 @@
 package com.zking.biz.user;
 
-import com.zking.biz.BaseBiz;
-import com.zking.biz.user.UserBiz;
+import com.zking.biz.BaseBizImpl;
 import com.zking.config.ConfigCode;
 import com.zking.enetity.UserBody;
 import com.zking.util.MD5Util;
@@ -10,12 +9,10 @@ import org.activiti.engine.identity.Group;
 import org.activiti.engine.identity.User;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 @Repository
-public class UserBizImpl extends BaseBiz implements UserBiz{
+public class UserBizImpl extends BaseBizImpl implements UserBiz{
 
     @Override
     public boolean addUser(IdentityService identityService,User arg0,String GroupId) {
@@ -82,8 +79,48 @@ public class UserBizImpl extends BaseBiz implements UserBiz{
     }
 
     @Override
+    public List<UserBody> getUserList(IdentityService identityService, int start, int end, String type, String value) {
+        List<UserBody> userBodies = new ArrayList<>();
+        List<User> users = identityService.createUserQuery().listPage(start,end);
+        long num = 0;
+        switch (type){
+            case "username":
+                users = identityService.createUserQuery().userId(value).listPage(start,end);
+                num  = identityService.createUserQuery().userId(value).count();
+                break;
+            case "group":
+                users = identityService.createUserQuery().memberOfGroup(value).listPage(start,end);
+                num = identityService.createUserQuery().memberOfGroup(value).count();
+                break;
+            case "email":
+                users = identityService.createUserQuery().userEmailLike(value).listPage(start,end);
+                num = identityService.createUserQuery().userEmailLike(value).count();
+                break;
+            case "firstname":
+                users = identityService.createUserQuery().userFirstNameLike(value).listPage(start,end);
+                num = identityService.createUserQuery().userFirstNameLike(value).count();
+                break;
+            case "lastname":
+                users = identityService.createUserQuery().userLastNameLike(value).listPage(start,end);
+                num = identityService.createUserQuery().userLastNameLike(value).count();
+                break;
+        }
+        UserBody userBody;
+        for (User e: users) {
+            userBody = new UserBody();
+            userBody.setUser(e);
+            userBody.setGroup(identityService.createGroupQuery().groupMember(e.getId()).singleResult());
+            userBody.setNum(num);
+            userBodies.add(userBody);
+        }
+        return userBodies;
+    }
+
+    @Override
     public List<Group> getGroupList( IdentityService identityService,int start,int end) {
         List<Group> groups = identityService.createGroupQuery().listPage(start,end);
         return groups;
     }
+
+
 }
