@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service
+@Service("list")
 public class ListStaticServiceImpl implements BaseService{
     @Resource
     ListStaticMapper ListStaticMapper;

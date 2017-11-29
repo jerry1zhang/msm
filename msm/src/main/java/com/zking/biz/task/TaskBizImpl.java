@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 @Repository
-public class BaseBizImpl extends BaseBizImpl implements TaskBiz{
+public class TaskBizImpl extends BaseBizImpl implements TaskBiz{
     @Override
     public boolean getTaskList(IdentityService identityService, TaskService taskService, HttpServletRequest request) {
 

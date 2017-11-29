@@ -32,7 +32,7 @@ public class BaseController {
 	}
 
 	/**
-	 * 得到request对象
+	 * 得到session对象
 	 */
 	public HttpSession getSession() {
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();

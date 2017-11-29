@@ -37,7 +37,7 @@ public class UserPageController extends BaseController{
     @Resource
     HistoryService historyService;
     @Resource
-    BaseService baseService = new ListStaticServiceImpl();
+    BaseService list;
 
     @Resource
     UserBiz userBiz;
@@ -100,7 +100,7 @@ public class UserPageController extends BaseController{
             return "error";
         }
         model.addAttribute("userBodies",userBodies);
-        model.addAttribute("userList",baseService.getAllList(getPageData()).get("list"));
+        model.addAttribute("userList",list.getAllList(getPageData()).get("list"));
         model.addAttribute("listNum",identityService.createUserQuery().count());
         return "/user/userList";
     }

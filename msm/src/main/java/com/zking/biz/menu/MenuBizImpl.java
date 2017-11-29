@@ -16,17 +16,17 @@ import java.util.List;
 @Repository
 public class MenuBizImpl extends BaseBizImpl implements MenuBiz{
 
-    @Resource
-    BaseService baseService = new MenuServiceImpl();
+    @Resource()
+    BaseService menu;
 
     @Override
     public List<MenuBody> initMenu(int powerLevel) {
         PageData pg = new PageData();
         pg.put("powerLevel",powerLevel);
         pg.put("level",ConfigCode.LEVEL_BIGMENU.getValue());
-        List<Menu> one = (List<Menu>)baseService.getPartList(pg).get("list");
+        List<Menu> one = (List<Menu>)menu.getPartList(pg).get("list");
         pg.put("level",ConfigCode.LEVEL_SMALLMENU.getValue());
-        List<Menu> two = (List<Menu>)baseService.getPartList(pg).get("list");
+        List<Menu> two = (List<Menu>)menu.getPartList(pg).get("list");
         if (one==null || two == null) {
             return null;
         }
