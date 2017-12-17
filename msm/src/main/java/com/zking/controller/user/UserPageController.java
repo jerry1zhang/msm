@@ -5,6 +5,7 @@ import com.zking.config.ConfigCode;
 import com.zking.config.KeyConfig;
 import com.zking.controller.base.BaseController;
 import com.zking.enetity.UserBody;
+import com.zking.pojo.ListStatic;
 import com.zking.service.BaseService;
 import com.zking.service.ListStaticService;
 import com.zking.service.impl.ListStaticServiceImpl;
@@ -84,6 +85,7 @@ public class UserPageController extends BaseController{
         String type = getRequest().getParameter("type")==null?"":getRequest().getParameter("type");
         String value = getRequest().getParameter("value")==null?"":getRequest().getParameter("value");
         logger.info("type="+type+"value="+value);
+        
         int page = 1;
         int start = (page-1)*KeyConfig.pagenum;
         int end = page*KeyConfig.pagenum;
@@ -94,13 +96,13 @@ public class UserPageController extends BaseController{
         }else{
             userBodies = userBiz.getUserList(identityService,start,end);
         }
-
-
         if(userBodies==null){
             return "error";
         }
+        PageData pg = new PageData();
+        pg.put("list_type", "userList");
         model.addAttribute("userBodies",userBodies);
-        model.addAttribute("userList",list.getAllList(getPageData()).get("list"));
+        model.addAttribute("userList",list.getAllList(pg).get("list"));
         model.addAttribute("listNum",identityService.createUserQuery().count());
         return "/user/userList";
     }
@@ -111,16 +113,19 @@ public class UserPageController extends BaseController{
      * @param model
      * @return
      */
-    @RequestMapping(value="/{page}", method= RequestMethod.POST)
-    public String a(@PathVariable int page,Model model){
-        String type = getRequest().getParameter("type")==null?"":getRequest().getParameter("type");
-        String value = getRequest().getParameter("value")==null?"":getRequest().getParameter("value");
+    @RequestMapping(value="/{page}/{type}/{value}", method= RequestMethod.POST)
+    public String getUserListPageTypeValue(@PathVariable int page,
+    				@PathVariable String type,
+    				@PathVariable String value,
+    				Model model){
+        String typeValue = type==null?"":type;
+        String valueValue = value==null?"":value;
         int start = (page-1)*KeyConfig.pagenum;
         int end = page*KeyConfig.pagenum;
         List<UserBody> userBodies =  null;
         if(!"".equals(type)&&!"".equals(value)){
             //通过某个值进行搜索
-            userBodies = userBiz.getUserList(identityService,start,end,type,value);
+            userBodies = userBiz.getUserList(identityService,start,end,typeValue,valueValue);
         }else{
             userBodies = userBiz.getUserList(identityService,start,end);
         }
@@ -130,6 +135,11 @@ public class UserPageController extends BaseController{
         model.addAttribute("userBodies",userBodies);
         model.addAttribute("num",page);
         return "/user/userFrom";
+    }
+    
+    @RequestMapping(value="/{page}", method= RequestMethod.POST)
+    public String getUserListPage(@PathVariable int page,Model model) {
+    	return getUserListPageTypeValue(page, null, null, model);
     }
 
 

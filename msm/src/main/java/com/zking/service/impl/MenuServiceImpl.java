@@ -32,7 +32,7 @@ public class MenuServiceImpl implements BaseService{
         List<Menu> list = menuMapper.ListByLevel(level);
         pg = new PageData();
         pg.put("list",list);
-        return null;
+        return pg;
     }
 
     @Override

@@ -88,3 +88,8 @@ function flushPagination(totalData, showData,time) {
 
     });
 }
+
+
+function select(object){
+	
+}

@@ -52,7 +52,7 @@
         <div class="am-input-group am-input-group-sm">
             <input type="text" class="am-form-field" selectId="selectV">
             <span class="am-input-group-btn">
-            <button class="am-btn am-btn-default" type="button" onclick="">搜索</button>
+            <button class="am-btn am-btn-default" type="button" onclick="select(this)" data-url="" data-port="">搜索</button>
           </span>
         </div>
     </div>

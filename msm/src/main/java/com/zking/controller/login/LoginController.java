@@ -53,11 +53,14 @@ public class LoginController extends BaseController{
 				return "login";
 			}
 			UserBody userBody = userBiz.getUser(identityService,user);
-			if(userBody.getUser().getPassword().equals(MD5Util.MD5Encode(getRequest().getParameter("password")))) {
-				getSession().setAttribute("User", userBody.getUser());
-				getSession().setAttribute("Group", userBody.getGroup());
+			if(userBody != null) {
+				if(userBody.getUser().getPassword().equals(MD5Util.MD5Encode(getRequest().getParameter("password")))) {
+					getSession().setAttribute("User", userBody.getUser());
+					getSession().setAttribute("Group", userBody.getGroup());
+					
+				}
 			}else{
-				getRequest().setAttribute("error_info",ConfigCode.user_error_1.getValue());
+				getRequest().setAttribute("error_info",ConfigCode.USER_ERROR_1.getValue());
 				return "login";
 			}
 

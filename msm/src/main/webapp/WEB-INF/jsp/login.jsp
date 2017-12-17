@@ -45,12 +45,10 @@
     <h3>登录</h3>
     <hr>
     <p><%
-      String info = "";
       if (request.getParameter("error_info")!=null){
-          info = (String) request.getAttribute("error_info");
+    	  out.print(request.getAttribute("error_info").toString());
       }
-    %>
-      <%=info%></p>
+    %></p>
     <br>
     <br>
 

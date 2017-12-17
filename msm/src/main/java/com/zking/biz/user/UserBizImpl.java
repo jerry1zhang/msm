@@ -58,7 +58,7 @@ public class UserBizImpl extends BaseBizImpl implements UserBiz{
             userBody.setGroup(groupContainsUser);
             logger.info("用户id:" + userinfo.getId() + "||用户所属组：||ID:" + groupContainsUser.getId() + "||NAME:" + groupContainsUser.getName()+"||登陆");
         }else {
-            logger.info("用户id:"+user.getId()+"||错误信息:"+ConfigCode.user_error_1.getValue());
+            logger.info("用户id:"+user.getId()+"||错误信息:"+ConfigCode.USER_ERROR_1.getValue());
             return null;
         }
         return userBody;
